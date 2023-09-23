@@ -1,0 +1,10 @@
+{
+    "identifier": "manyLearn.antlers",
+    "name": "Antlers",
+    "organization": "ManyLearn",
+    "description": "Language support for statamic antlers",
+    "version": "1.0",
+    "keywords": ["Antlers", "statamic", "templates", "syntax"],
+    "categories": ["languages", "completions"],
+    "activationEvents": ["onLanguage:antlers"]
+}

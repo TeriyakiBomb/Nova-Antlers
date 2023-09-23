@@ -1,0 +1,1023 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<completions>
+    <!-- Basic completions -->
+    <provider>
+        <syntax>antlers</syntax>
+        <selector>*:not(string,comment)</selector>
+        <expression>([a-zA-Z]*)</expression>
+        <set>antlers.tags</set>
+    </provider>
+
+    <!-- Modifiers after "|" -->
+    <provider>
+        <syntax>antlers</syntax>
+        <selector>*:not(comment)</selector>
+        <expression>(?&lt;=\|\s)([a-zA-Z]*)</expression>
+        <set>antlers.modifiers</set>
+    </provider>
+
+ <!-- This is broken -->
+    <provider>
+        <syntax>antlers</syntax>
+        <selector>*:not(comment)</selector>
+        <expression>(\{\{\s*[if]+\s*)([a-zA-Z_])+\s</expression>
+        <set>antlers.filters</set>
+    </provider>
+
+<set name="antlers.tags" symbol="variable">
+    <behavior>
+        <prepend>{{ </prepend>
+        <append> }}</append>
+    </behavior>
+
+    <!-- Conditionals -->
+
+    <completion string="if" symbol="function">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[condition]}} $[…] {{ /if }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="elseif" symbol="function">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[condition] }}</append>
+        </behavior>
+    </completion>
+
+    <!-- Everything else -->
+
+    <completion string="else"/>
+
+    <completion string="assets" symbol="getter">
+        <behavior>
+            <prepend>{{</prepend>
+            <append> container=$[name] }} $[…] {{ /assets }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="asset" symbol="getter">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> url="$[url]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="cache">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[] {{ /cache }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="collection" symbol="getter">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /collection:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <!-- OTHR COLLECTIONSZ -->
+
+    <completion string="cookie" symbol="getter">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} %[] {{ /cookie}}</append>
+        </behavior>
+    </completion>
+
+    <completion string="dump"/>
+
+    <completion string="foreach" symbol="getter">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] as=$[name] }} $[…] {{ /foreach:$[}}</append>
+        </behavior>
+    </completion>
+
+    <!-- // TODO  add form stuff -->
+
+    <completion string="get_content">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :$[] }} $[…] {{ /get_content:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="get_errors" priority="2">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :$[] }} $[…] {{ /get_errors:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="get_errors:all">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> {{ /{ get_errors:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="get_error" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :$[] }} $[…] {{ /get_error:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="get_files">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> in="$[]" "}} $[…] {{ /get_error:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - get files pipe bits -->
+
+    <!-- GLIDE -->
+
+    <completion string="glide" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src="$[image]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="glide">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src="$[image]" }} $[…] {{ /glide }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="glide:batch">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src="$[image]" }} $[…] {{ /glide:batch }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO: Add glide parameters -->
+
+    <completion string="increment" priority="1"/>
+    <completion string="increment:again"/>
+
+    <completion string="increment">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> from="$[from]" by="$[by]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="installed" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /installed:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="installed">
+        <behavior>
+            <prepend>{</prepend>
+            <append>:$[composer package]</append>
+        </behavior>
+    </completion>
+
+    <completion string="link" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>to="$[link]"}}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - add absolute -->
+
+    <completion string="link">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>id="$[id]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="link">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>id="$[id]" in="$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="locales" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} $[…] {{ /locales }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="locales">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /locales:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="locales:count"/>
+
+    <!-- TODO: - add locale self -->
+
+    <completion string="loop" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> times="$[…]" }} $[…] {{ /loop }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="loop">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :times="$[…]" }} $[…] {{ /loop }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO: - add loop from and to -->
+
+    <completion string="markdown"/>
+    <completion string="markdown:indent"/>
+
+    {{ mix src=
+
+    <completion string="mix" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src='$[…]' }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="mix">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src='$[…]' in='$[…]' }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="mount_url">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> handle="$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="mount_url" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:"$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="nav" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /nav:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="nav">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> handle="$[]" }} $[…] {{ /nav:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="nav" priority="2">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> include_home="true" }} $[…] {{ /nav }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="nav">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :from="$[…]" }} $[…] {{ /nav }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="nav:breadcrumbs">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} $[…] {{ /nav:breadcrumbs }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO: add the rest of the nav stuff -->
+
+    <completion string="nav:collection">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:"$[…]" }} $[…] {{ /nav:collection:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="nocache">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[] {{ /nocache }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="oauth">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> provider="$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="oauth" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:"$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="oauth">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> provider="$[…]" redirect="$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="obfuscate">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} {{ /obfuscate }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="parent" priority="1"/>
+
+    <completion string="parent">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[variable] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="parent">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} {{ /parent }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="partial">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="partial">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /partial:$[]}}}</append>
+        </behavior>
+    </completion>
+
+    <completion string="partial:exists">
+        <behavior>
+            <prepend>{</prepend>
+            <append> src:="$[]" }} $[…]}</append>
+        </behavior>
+    </completion>
+
+    <completion string="partial:if_exists">
+        <behavior>
+            <prepend>{</prepend>
+            <append> src:="$[]" }} $[…]}</append>
+        </behavior>
+    </completion>
+
+    <!-- add protect password form -->
+
+    <completion string="redirect" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> to="$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="redirect">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> route="$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="route">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> route=:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="search">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /search:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - add extra search stuff -->
+
+    <completion string="section">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }} $[…] {{ /section:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} $[…] {{ /session }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session:dump"/>
+
+    <completion string="session:flash">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[variable]="$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session:flush"/>
+
+    <completion string="session:forget">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> keys="$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session:has">
+        <behavior>
+            <prepend>{</prepend>
+            <append> key="$[]"}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session:set">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[variable]="$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="session:set">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[variable]="$[…]" }} {{ /session:set }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - add extra session stuff -->
+
+    <completion string="svg" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src="$[src]" class="$[class]"}}</append>
+        </behavior>
+    </completion>
+
+    <completion string="svg">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :src="$[src]" class="$[class]"}}</append>
+        </behavior>
+    </completion>
+
+    <completion string="switch">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> between="$[…] | $[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="taxonomy" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> from="$[…]" }} $[…] {{ /taxonomy }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="taxonomy">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:"$[…]" }} $[…] {{ /taxonomy }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - add extra taxonomy stuff -->
+
+    <completion string="trans" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="trans">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>key="$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="trans_choice">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append>:"$[…]" count="$[number]" }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - add other trans stuff -->
+
+    <completion string="user_groups" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} $[] {{ / user_groups }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user_groups">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> handle="$[handle]" }} $[…] {{ / user_groups }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user_roles" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} $[] {{ / user_roles }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user_roles">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> handle="$[handle]" }} $[…] {{ / user_roles }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:can">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> do="$[…]" }} $[…] {{ / user:can }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:cant">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> do="$[…]" }} $[…] {{ / user:cant }}</append>
+        </behavior>
+    </completion>
+
+     <!-- TODO - user perms list -->
+
+     <!-- TODO - user forgot password form -->
+
+     <completion string="user:in" priority="1">
+         <behavior>
+             <prepend>{{ </prepend>
+             <append> group="$[…]" }} $[…] {{ / user:in }}</append>
+         </behavior>
+     </completion>
+
+    <completion string="user:in">
+      <behavior>
+          <prepend>{{ </prepend>
+          <append> groups="$[…]" }} $[…] {{ / user:in }}</append>
+      </behavior>
+  </completion>
+
+  <completion string="user:not_in" priority="1">
+       <behavior>
+           <prepend>{{ </prepend>
+           <append> group="$[…]" }} $[…] {{ / user:not_in }}</append>
+       </behavior>
+   </completion>
+
+   <completion string="user:not_in">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> groups="$[…]" }} $[…] {{ / user:not_in }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:is" priority="1">
+       <behavior>
+           <prepend>{{ </prepend>
+           <append> role="$[…]" }} $[…] {{ / user:is }}</append>
+       </behavior>
+   </completion>
+
+   <completion string="user:is">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> roles="$[…]" }} $[…] {{ / user:is }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:isnt" priority="1">
+       <behavior>
+           <prepend>{{ </prepend>
+           <append> role="$[…]" }} $[…] {{ / user:isnt }}</append>
+       </behavior>
+   </completion>
+
+   <completion string="user:isnt">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> roles="$[…]" }} $[…] {{ / user:isnt }}</append>
+        </behavior>
+    </completion>
+
+
+    <!-- TODO - add user login form -->
+
+    <completion string="user:logout">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> redirect="$[…]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> }} $[] { /user }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> super:is="true" }} $[] { /user }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:profile">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> field="$[field]" :value="$[value]" }} $[…] { /user:profile }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:profile">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> id="$[id]"}} $[…] { /user:profile }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:profile">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> email="$[email]"}} $[…] { /user:profile }}</append>
+        </behavior>
+    </completion>
+
+    <!-- TODO - add other user stuff https://statamic.dev/tags/user-profile -->
+
+    <!-- TODO - Add user register form -->
+
+    <!-- TODO - add password reset form -->
+
+    <!-- TODO - add user conditions and conditions in general https://statamic.dev/tags/users -->
+
+    <completion string="users">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> $[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="users">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> query_scope="$[]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="vite">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src="$[src]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="vite">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> src="$[src]" directory="$[directory]" hot="$[hot]" }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="yield" priority="1">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="yield">
+        <behavior>
+            <prepend>{{ </prepend>
+            <append> :$[] }} $[...] {{/ yield:$[] }}</append>
+        </behavior>
+    </completion>
+
+    <completion string="user:logout_url"/>
+    <completion string="url"/>
+    <completion string="alt"/>
+    <completion string="title"/>
+    <completion string="current_template"/>
+    <completion string="edit_url"/>
+    <completion string="id"/>
+    <completion string="last_modified"/>
+    <completion string="permalink"/>
+    <completion string="published"/>
+    <completion string="slug"/>
+    <completion string="collection"/>
+    <completion string="date"/>
+    <completion string="datestamp"/>
+    <completion string="datestring"/>
+    <completion string="has_timestamp"/>
+    <completion string="is_entry"/>
+    <completion string="order"/>
+    <completion string="order_type"/>
+    <completion string="timestamp"/>
+    <completion string="entries_count"/>
+    <completion string="is_term"/>
+    <completion string="taxonomy"/>
+    <completion string="basename"/>
+    <completion string="extension"/>
+    <completion string="filename"/>
+    <completion string="focus"/>
+    <completion string="focus_css"/>
+    <completion string="height"/>
+    <completion string="is_asset"/>
+    <completion string="is_image"/>
+    <completion string="path"/>
+    <completion string="size"/>
+    <completion string="size_bytes"/>
+    <completion string="size_gigabytes"/>
+    <completion string="size_kilobytes"/>
+    <completion string="size_megabytes"/>
+    <completion string="width"/>
+    <completion string="is_video"/>
+    <completion string="config"/>
+    <completion string="csrf_field"/>
+    <completion string="csrf_token"/>
+    <completion string="current_template"/>
+    <completion string="current_uri"/>
+    <completion string="current_url"/>
+    <completion string="environment"/>
+    <completion string="get"/>
+    <completion string="get_post"/>
+    <completion string="homepage"/>
+    <completion string="is_homepage"/>
+    <completion string="last_segment"/>
+    <completion string="logged_in"/>
+    <completion string="now"/>
+    <completion string="old"/>
+    <completion string="post"/>
+    <completion string="response_code"/>
+    <completion string="segment_x"/>
+    <completion string="site"/>
+    <completion string="sites"/>
+    <completion string="xml_header"/>
+
+</set>
+
+<set name="antlers.filters">
+    <completion string="in">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string="as">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string="as">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string="key">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string="for">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string="tags">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+</set>
+
+<set name="antlers.modifiers">
+    <completion string="add" />
+    <completion string="add_slashes" />
+    <completion string="ampersand_list" />
+    <completion string="as" />
+    <completion string="ascii" />
+    <completion string="at" />
+    <completion string="background_position" />
+    <completion string="backspace" />
+    <completion string="bard_html" />
+    <completion string="bard_items" />
+    <completion string="bard_text" />
+    <completion string="camelize" />
+    <completion string="cdata" />
+    <completion string="ceil" />
+    <completion string="chunk" />
+    <completion string="collapse" />
+    <completion string="collapse_whitespace" />
+    <completion string="compact" />
+    <completion string="console_log" />
+    <completion string="contains" />
+    <completion string="contains_all" />
+    <completion string="contains_any" />
+    <completion string="count" />
+    <completion string="count_substring" />
+    <completion string="dashify" />
+    <completion string="days_ago" />
+    <completion string="decode" />
+    <completion string="deslugify" />
+    <completion string="divide" />
+    <completion string="dl" />
+    <completion string="dump" />
+    <completion string="embed_url" />
+    <completion string="ends_with" />
+    <completion string="ensure_left" />
+    <completion string="ensure_right" />
+    <completion string="entities" />
+    <completion string="excerpt" />
+    <completion string="explode" />
+    <completion string="favicon" />
+    <completion string="first" />
+    <completion string="flatten" />
+    <completion string="flip" />
+    <completion string="floor" />
+    <completion string="format" />
+    <completion string="format_localized" />
+    <completion string="format_number" />
+    <completion string="full_urls" />
+    <completion string="get" />
+    <completion string="gravatar" />
+    <completion string="group_by" />
+    <completion string="has_lower_case" />
+    <completion string="has_upper_case" />
+    <completion string="hours_ago" />
+    <completion string="image" />
+    <completion string="in_array" />
+    <completion string="insert" />
+    <completion string="is_after" />
+    <completion string="is_alpha" />
+    <completion string="is_alphanumeric" />
+    <completion string="is_array" />
+    <completion string="is_before" />
+    <completion string="is_between" />
+    <completion string="is_blank" />
+    <completion string="is_email" />
+    <completion string="is_embeddable" />
+    <completion string="is_empty" />
+    <completion string="is_future" />
+    <completion string="is_json" />
+    <completion string="is_leap_year" />
+    <completion string="is_lowercase" />
+    <completion string="is_numberwang" />
+    <completion string="is_numeric" />
+    <completion string="is_past" />
+    <completion string="is_today" />
+    <completion string="is_tomorrow" />
+    <completion string="is_uppercase" />
+    <completion string="is_url" />
+    <completion string="is_weekday" />
+    <completion string="is_weekend" />
+    <completion string="is_yesterday" />
+    <completion string="iso_format" />
+    <completion string="join" />
+    <completion string="last" />
+    <completion string="lcfirst" />
+    <completion string="length" />
+    <completion string="limit" />
+    <completion string="link" />
+    <completion string="list" />
+    <completion string="lower" />
+    <completion string="macro" />
+    <completion string="mailto" />
+    <completion string="mark" />
+    <completion string="markdown" />
+    <completion string="md5" />
+    <completion string="merge" />
+    <completion string="minutes_ago" />
+    <completion string="mod" />
+    <completion string="modify_date" />
+    <completion string="months_ago" />
+    <completion string="multiply" />
+    <completion string="nl2br" />
+    <completion string="obfuscate" />
+    <completion string="obfuscate_email" />
+    <completion string="offset" />
+    <completion string="ol" />
+    <completion string="option_list" />
+    <completion string="output" />
+    <completion string="pad" />
+    <completion string="parse_url" />
+    <completion string="partial" />
+    <completion string="pathinfo" />
+    <completion string="piped" />
+    <completion string="plural" />
+    <completion string="raw" />
+    <completion string="raw_url_encode" />
+    <completion string="ray" />
+    <completion string="read_time" />
+    <completion string="regex_mark" />
+    <completion string="regex_replace" />
+    <completion string="relative" />
+    <completion string="remove_left" />
+    <completion string="remove_right" />
+    <completion string="repeat" />
+    <completion string="replace" />
+    <completion string="reverse" />
+    <completion string="round" />
+    <completion string="safe_truncate" />
+    <completion string="sanitize" />
+    <completion string="seconds_ago" />
+    <completion string="segment" />
+    <completion string="sentence_list" />
+    <completion string="shuffle" />
+    <completion string="singular" />
+    <completion string="slugify" />
+    <completion string="smartypants" />
+    <completion string="sort" />
+    <completion string="spaceless" />
+    <completion string="starts_with" />
+    <completion string="strip_tags" />
+    <completion string="substr" />
+    <completion string="subtract" />
+    <completion string="sum" />
+    <completion string="surround" />
+    <completion string="swap_case" />
+    <completion string="table" />
+    <completion string="tidy" />
+    <completion string="timezone" />
+    <completion string="title" />
+    <completion string="to_json" />
+    <completion string="to_spaces" />
+    <completion string="to_tabs" />
+    <completion string="trans" />
+    <completion string="trim" />
+    <completion string="truncate" />
+    <completion string="ucfirst" />
+    <completion string="ul" />
+    <completion string="underscored" />
+    <completion string="unique" />
+    <completion string="upper" />
+    <completion string="url" />
+    <completion string="url_decode" />
+    <completion string="url_encode" />
+    <completion string="weeks_ago" />
+    <completion string="where" />
+    <completion string="widont" />
+    <completion string="word_count" />
+    <completion string="wrap" />
+    <completion string="years_ago" />
+</set>
+</completions>

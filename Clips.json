@@ -1,0 +1,8 @@
+{
+  "clips" : [
+    {
+      "content" : "{{ form:create in=\"$0\" }}\n \n\t{{ if errors }}\n\t\t<div>\n\t\t\t{{ errors }}\n\t\t\t\t{{ value }}<br>\n\t\t\t{{ \/errors }}\n\t\t<\/div>\n\t{{ \/if }}\n \n\t{{ if success }}\n\t\t<div>\n\t\t\t{{ success }}\n\t\t<\/div>\n\t{{ \/if }}\n \n\t<label>Email<\/label>\n\t<input type=\"text\" name=\"email\" value=\"{{ old:email }}\" \/>\n \n\t<label>Message<\/label>\n\t<textarea name=\"message\" rows=\"5\">{{ old:message }}<\/textarea>\n \n\t<button>Submit<\/button>\n \n{{ \/form:create }}",
+      "name" : "test 2"
+    }
+  ]
+}

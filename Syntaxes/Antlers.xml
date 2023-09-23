@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="antlers">
+    <meta>
+        <name>Antlers-HTML</name>
+        <type>markup</type>
+        <preferred-file-extension>antlers.html</preferred-file-extension>
+        <parent>html</parent>
+    </meta>
+
+    <detectors>
+        <extension priority="1.0">antlers.html</extension>
+    </detectors>
+
+   <indentation>
+       <increase>
+           <expression>(?x)
+               (&lt;(?!\?|(?:area|base|br|col|embed|hr|img|input|link|meta|param|source|track|wbr)\b)
+               ([-_\.A-Za-z0-9]+)(?=\s|&gt;)\b[^&gt;]*&gt;[^&lt;]*$)
+               |(&lt;!--\s*$)
+           </expression>
+       </increase>
+       <decrease>
+           <expression>(?x)
+               ^\s*
+               (&lt;/[-_\.A-Za-z0-9]+\b[^>]*&gt;
+               |--&gt;
+           )</expression>
+       </decrease>
+   </indentation>
+
+    <comments>
+        <multiline>
+            <starts-with>
+                <expression>{{#</expression>
+            </starts-with>
+            <ends-with>
+                <expression>#}}</expression>
+            </ends-with>
+        </multiline>
+    </comments>
+
+    <brackets>
+        <pair open="{{" close="}}" />
+        <pair open="(" close=")" />
+        <pair open="[" close="]" />
+    </brackets>
+
+    <surrounding-pairs>
+      <pair open="&lt;" close="&gt;" />
+      <pair open="[" close="]" />
+      <pair open="(" close=")" />
+      <pair open="&apos;" close="&apos;" />
+      <pair open="&quot;" close="&quot;" />
+      <pair open="`" close="`" />
+      <pair open="{{" close="}}" />
+    </surrounding-pairs>
+
+    <scopes spell-check="true" lookup="dictionary">
+        <include syntax="html" />
+    </scopes>
+
+
+    <template-scopes>
+
+        <scope name="antlers.tag.attribute.value">
+            <expression>(\s*[a-zA-Z_]+):[a-zA-Z_]+</expression>
+        </scope>
+
+        <scope name="antlers.comment.block" spell-check="true">
+            <starts-with>
+                <expression>\{{\#</expression>
+                <capture number="0" name="antlers.comment.block.start" />
+            </starts-with>
+            <ends-with>
+                <expression>\#\}}</expression>
+                <capture number="0" name="antlers.comment.block.end" />
+            </ends-with>
+        </scope>
+
+        <scope name="antlers.tag.framework" spell-check="false" lookup="index">
+            <symbol type="tag-framework">
+                <context behavior="subtree" group-by-name="true" />
+            </symbol>
+            <starts-with>
+                <expression>\{\{</expression>
+                <capture number="0" name="antlers.tag.framework.variable.start" />
+            </starts-with>
+            <ends-with>
+                <expression>\}\}</expression>
+                <capture number="0" name="antlers.tag.framework.variable.end" />
+            </ends-with>
+            <subscopes>
+                <scope name="antlers.value.number">
+                    <!-- Matches a number -->
+                    <expression>\d+</expression>
+                </scope>
+                <scope name="antlers.value.boolean">
+                    <!-- Matches a boolean keyword -->
+                    <expression>true|false</expression>
+                </scope>
+                <scope name="antlers.string">
+                    <!-- Matches text between double-quotes -->
+                    <expression>&quot;[^&quot;]*&quot;</expression>
+                </scope>
+                <scope name="antlers.string">
+                    <!-- Matches text between double-quotes -->
+                    <expression>:[a-zA-Z_]+</expression>
+                </scope>
+
+                <scope name="antlers.operator">
+                    <!-- Matches text between double-quotes -->
+                    <expression>[\=|&lt;|&gt;|\!]</expression>
+                </scope>
+                <scope name="antlers.identifier.argument">
+                    <!-- Matches text between double-quotes -->
+                    <expression>.\w+</expression>
+                </scope>
+                <scope name="antlers.value.null">
+                    <strings>
+                        <string>null</string>
+                    </strings>
+                </scope>
+                <scope name="antlers.value.boolean">
+                    <strings>
+                        <string>true</string>
+                        <string>false</string>
+                    </strings>
+                </scope>
+            </subscopes>
+
+        </scope>
+
+    </template-scopes>
+
+</syntax>
