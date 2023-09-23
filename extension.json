@@ -1,8 +1,10 @@
 {
-    "identifier": "manyLearn.antlers",
+    "identifier": "teriyakibomb.antlers",
     "name": "Antlers",
-    "organization": "ManyLearn",
+    "organization": "TeriyakiBomb",
     "description": "Language support for statamic antlers",
+    "repository": "https://github.com/TeriyakiBomb/Nova-Antlers",
+    "bugs": "https://github.com/TeriyakiBomb/Nova-Antlers/issues",
     "version": "1.0",
     "keywords": ["Antlers", "statamic", "templates", "syntax"],
     "categories": ["languages", "completions"],
