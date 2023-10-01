@@ -16,13 +16,22 @@
         <set>antlers.modifiers</set>
     </provider>
 
- <!-- This is broken -->
-    <provider>
+ <!-- after string: -->
+  <provider>
+       <syntax>antlers</syntax>
+       <selector>*:not(comment)</selector>
+       <expression>\w+((^:([a-zA-Z0-9-_/-@]+)){1,2})?</expression>
+       <set>antlers.filters</set>
+   </provider>
+   <!-- not working yet
+   <provider>
         <syntax>antlers</syntax>
         <selector>*:not(comment)</selector>
-        <expression>(\{\{\s*[if]+\s*)([a-zA-Z_])+\s</expression>
-        <set>antlers.filters</set>
-    </provider>
+        <expression>(?<=can do=").*?(?=")</expression>
+        <set>antlers.userperms</set>
+    </provider> -->
+
+    {{ foreach:￼ as=field }} {{ dump }} {{ /foreach:￼ }}￼￼￼
 
 <set name="antlers.tags" symbol="variable">
     <behavior>
@@ -35,7 +44,7 @@
     <completion string="if" symbol="function">
         <behavior>
             <prepend>{{ </prepend>
-            <append> $[condition]}} $[…] {{ /if }}</append>
+            <append> $[condition]}} $[￼] {{ /if }}</append>
         </behavior>
     </completion>
 
@@ -53,7 +62,7 @@
     <completion string="assets" symbol="getter">
         <behavior>
             <prepend>{{</prepend>
-            <append> container=$[name] }} $[…] {{ /assets }}</append>
+            <append> container=$[name] }} $[￼] {{ /assets }}</append>
         </behavior>
     </completion>
 
@@ -74,7 +83,7 @@
     <completion string="collection" symbol="getter">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /collection:$[] }}</append>
+            <append>:$[collection] }} $[￼] {{ /collection:$[collection] }}</append>
         </behavior>
     </completion>
 
@@ -92,7 +101,7 @@
     <completion string="foreach" symbol="getter">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] as=$[name] }} $[…] {{ /foreach:$[}}</append>
+            <append>:$[object] as=$[name] }} $[￼] {{ /foreach:$[object] }}</append>
         </behavior>
     </completion>
 
@@ -101,14 +110,14 @@
     <completion string="get_content">
         <behavior>
             <prepend>{{ </prepend>
-            <append> :$[] }} $[…] {{ /get_content:$[] }}</append>
+            <append> :$[content] }} $[￼] {{ /get_content:$[content] }}</append>
         </behavior>
     </completion>
 
     <completion string="get_errors" priority="2">
         <behavior>
             <prepend>{{ </prepend>
-            <append> :$[] }} $[…] {{ /get_errors:$[] }}</append>
+            <append> :$[object] }} $[￼] {{ /get_errors:$[object] }}</append>
         </behavior>
     </completion>
 
@@ -122,14 +131,14 @@
     <completion string="get_error" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> :$[] }} $[…] {{ /get_error:$[] }}</append>
+            <append> :$[object] }} $￼ {{ /get_error:$[object] }}</append>
         </behavior>
     </completion>
 
     <completion string="get_files">
         <behavior>
             <prepend>{{ </prepend>
-            <append> in="$[]" "}} $[…] {{ /get_error:$[] }}</append>
+            <append> in="$[object]" "}} $[￼] {{ /get_error:$[object] }}</append>
         </behavior>
     </completion>
 
@@ -147,14 +156,14 @@
     <completion string="glide">
         <behavior>
             <prepend>{{ </prepend>
-            <append> src="$[image]" }} $[…] {{ /glide }}</append>
+            <append> src="$[image]" }} $[￼] {{ /glide }}</append>
         </behavior>
     </completion>
 
     <completion string="glide:batch">
         <behavior>
             <prepend>{{ </prepend>
-            <append> src="$[image]" }} $[…] {{ /glide:batch }}</append>
+            <append> src="$[image]" }} $[￼] {{ /glide:batch }}</append>
         </behavior>
     </completion>
 
@@ -173,7 +182,7 @@
     <completion string="installed" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /installed:$[] }}</append>
+            <append>:$[object] }} $[￼] {{ /installed:$[object] }}</append>
         </behavior>
     </completion>
 
@@ -203,21 +212,21 @@
     <completion string="link">
         <behavior>
             <prepend>{{ </prepend>
-            <append>id="$[id]" in="$[…]" }}</append>
+            <append>id="$[id]" in="$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="locales" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} $[…] {{ /locales }}</append>
+            <append> }} $[￼] {{ /locales }}</append>
         </behavior>
     </completion>
 
     <completion string="locales">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /locales:$[] }}</append>
+            <append>:$[locale] }} $￼ {{ /locales:$[locale] }}</append>
         </behavior>
     </completion>
 
@@ -228,14 +237,7 @@
     <completion string="loop" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> times="$[…]" }} $[…] {{ /loop }}</append>
-        </behavior>
-    </completion>
-
-    <completion string="loop">
-        <behavior>
-            <prepend>{{ </prepend>
-            <append> :times="$[…]" }} $[…] {{ /loop }}</append>
+            <append> times="$[times]" }} $[￼] {{ /loop }}</append>
         </behavior>
     </completion>
 
@@ -249,63 +251,63 @@
     <completion string="mix" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> src='$[…]' }}</append>
+            <append> src='$￼' }}</append>
         </behavior>
     </completion>
 
     <completion string="mix">
         <behavior>
             <prepend>{{ </prepend>
-            <append> src='$[…]' in='$[…]' }}</append>
+            <append> src='$[src]' in='$[object]' }}</append>
         </behavior>
     </completion>
 
     <completion string="mount_url">
         <behavior>
             <prepend>{{ </prepend>
-            <append> handle="$[…]" }}</append>
+            <append> handle="$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="mount_url" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:"$[…]" }}</append>
+            <append>:"$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="nav" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /nav:$[] }}</append>
+            <append>:$[nav] }} $[￼] {{ /nav:$[nav] }}</append>
         </behavior>
     </completion>
 
     <completion string="nav">
         <behavior>
             <prepend>{{ </prepend>
-            <append> handle="$[]" }} $[…] {{ /nav:$[] }}</append>
+            <append> handle="$[nav]" }} $[￼] {{ /nav:$[nav] }}</append>
         </behavior>
     </completion>
 
     <completion string="nav" priority="2">
         <behavior>
             <prepend>{{ </prepend>
-            <append> include_home="true" }} $[…] {{ /nav }}</append>
+            <append> include_home="true" }} $[￼] {{ /nav }}</append>
         </behavior>
     </completion>
 
     <completion string="nav">
         <behavior>
             <prepend>{{ </prepend>
-            <append> :from="$[…]" }} $[…] {{ /nav }}</append>
+            <append> :from="$nav" }} $[￼] {{ /nav }}</append>
         </behavior>
     </completion>
 
     <completion string="nav:breadcrumbs">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} $[…] {{ /nav:breadcrumbs }}</append>
+            <append> }} $[￼] {{ /nav:breadcrumbs }}</append>
         </behavior>
     </completion>
 
@@ -314,42 +316,42 @@
     <completion string="nav:collection">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:"$[…]" }} $[…] {{ /nav:collection:$[] }}</append>
+            <append>:"$[collection]" }} $[￼] {{ /nav:collection:$[collection] }}</append>
         </behavior>
     </completion>
 
     <completion string="nocache">
         <behavior>
             <prepend>{{ </prepend>
-            <append> $[] {{ /nocache }}</append>
+            <append> $[￼] {{ /nocache }}</append>
         </behavior>
     </completion>
 
     <completion string="oauth">
         <behavior>
             <prepend>{{ </prepend>
-            <append> provider="$[]" }}</append>
+            <append> provider="$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="oauth" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:"$[]" }}</append>
+            <append>:"$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="oauth">
         <behavior>
             <prepend>{{ </prepend>
-            <append> provider="$[…]" redirect="$[…]" }}</append>
+            <append> provider="$[provider]" redirect="$[redirect]" }}</append>
         </behavior>
     </completion>
 
     <completion string="obfuscate">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} {{ /obfuscate }}</append>
+            <append> }} $[￼] {{ /obfuscate }}</append>
         </behavior>
     </completion>
 
@@ -379,21 +381,21 @@
     <completion string="partial">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /partial:$[]}}}</append>
+            <append>:$[partial] }} $[￼] {{ /partial:$[partial] }}</append>
         </behavior>
     </completion>
 
     <completion string="partial:exists">
         <behavior>
-            <prepend>{</prepend>
-            <append> src:="$[]" }} $[…]}</append>
+            <prepend>{{ if {</prepend>
+            <append> src:="$[partial]" } }}</append>
         </behavior>
     </completion>
 
     <completion string="partial:if_exists">
         <behavior>
             <prepend>{</prepend>
-            <append> src:="$[]" }} $[…]}</append>
+            <append> src:="$[partial]" }} $[￼]}</append>
         </behavior>
     </completion>
 
@@ -423,7 +425,7 @@
     <completion string="search">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /search:$[] }}</append>
+            <append>:$[search] }} $[￼] {{ /search:$[search] }}</append>
         </behavior>
     </completion>
 
@@ -432,14 +434,14 @@
     <completion string="section">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:$[] }} $[…] {{ /section:$[] }}</append>
+            <append>:$[section] }} $[￼] {{ /section:$[section] }}</append>
         </behavior>
     </completion>
 
     <completion string="session">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} $[…] {{ /session }}</append>
+            <append> }} $[￼] {{ /session }}</append>
         </behavior>
     </completion>
 
@@ -455,7 +457,7 @@
     <completion string="session:flash">
         <behavior>
             <prepend>{{ </prepend>
-            <append> $[variable]="$[…]" }}</append>
+            <append> $[variable]="$[￼]" }}</append>
         </behavior>
     </completion>
 
@@ -478,14 +480,14 @@
     <completion string="session:set">
         <behavior>
             <prepend>{{ </prepend>
-            <append> $[variable]="$[…]" }}</append>
+            <append> $[variable]="$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="session:set">
         <behavior>
             <prepend>{{ </prepend>
-            <append> $[variable]="$[…]" }} {{ /session:set }}</append>
+            <append> $[variable]="$[￼]" }} {{ /session:set }}</append>
         </behavior>
     </completion>
 
@@ -508,21 +510,21 @@
     <completion string="switch">
         <behavior>
             <prepend>{{ </prepend>
-            <append> between="$[…] | $[…]" }}</append>
+            <append> between="$[between] | $[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="taxonomy" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> from="$[…]" }} $[…] {{ /taxonomy }}</append>
+            <append> from="$[taxonomy]" }} $[￼] {{ /taxonomy }}</append>
         </behavior>
     </completion>
 
     <completion string="taxonomy">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:"$[…]" }} $[…] {{ /taxonomy }}</append>
+            <append>:"$[taxonomy]" }} $[￼] {{ /taxonomy }}</append>
         </behavior>
     </completion>
 
@@ -545,7 +547,7 @@
     <completion string="trans_choice">
         <behavior>
             <prepend>{{ </prepend>
-            <append>:"$[…]" count="$[number]" }}</append>
+            <append>:"$[￼]" count="$[number]" }}</append>
         </behavior>
     </completion>
 
@@ -554,42 +556,42 @@
     <completion string="user_groups" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} $[] {{ / user_groups }}</append>
+            <append> }} $[] {{ /user_groups }}</append>
         </behavior>
     </completion>
 
     <completion string="user_groups">
         <behavior>
             <prepend>{{ </prepend>
-            <append> handle="$[handle]" }} $[…] {{ / user_groups }}</append>
+            <append> handle="$[handle]" }} $[￼] {{ /user_groups }}</append>
         </behavior>
     </completion>
 
     <completion string="user_roles" priority="1">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} $[] {{ / user_roles }}</append>
+            <append> }} $[] {{ /user_roles }}</append>
         </behavior>
     </completion>
 
     <completion string="user_roles">
         <behavior>
             <prepend>{{ </prepend>
-            <append> handle="$[handle]" }} $[…] {{ / user_roles }}</append>
+            <append> handle="$[handle]" }} $[￼] {{ /user_roles }}</append>
         </behavior>
     </completion>
 
     <completion string="user:can">
         <behavior>
             <prepend>{{ </prepend>
-            <append> do="$[…]" }} $[…] {{ / user:can }}</append>
+            <append> do="$[permissions]" }} $[￼] {{ /user:can }}</append>
         </behavior>
     </completion>
 
     <completion string="user:cant">
         <behavior>
             <prepend>{{ </prepend>
-            <append> do="$[…]" }} $[…] {{ / user:cant }}</append>
+            <append> do="$[permissions]" }} $[￼] {{ /user:cant }}</append>
         </behavior>
     </completion>
 
@@ -600,56 +602,56 @@
      <completion string="user:in" priority="1">
          <behavior>
              <prepend>{{ </prepend>
-             <append> group="$[…]" }} $[…] {{ / user:in }}</append>
+             <append> group="$[group]" }} $[￼] {{ /user:in }}</append>
          </behavior>
      </completion>
 
     <completion string="user:in">
       <behavior>
           <prepend>{{ </prepend>
-          <append> groups="$[…]" }} $[…] {{ / user:in }}</append>
+          <append> groups="$[groups]" }} $[￼] {{ /user:in }}</append>
       </behavior>
   </completion>
 
   <completion string="user:not_in" priority="1">
        <behavior>
            <prepend>{{ </prepend>
-           <append> group="$[…]" }} $[…] {{ / user:not_in }}</append>
+           <append> group="$[group]" }} $[￼] {{ /user:not_in }}</append>
        </behavior>
    </completion>
 
    <completion string="user:not_in">
         <behavior>
             <prepend>{{ </prepend>
-            <append> groups="$[…]" }} $[…] {{ / user:not_in }}</append>
+            <append> groups="$[groups]" }} $[￼] {{ /user:not_in }}</append>
         </behavior>
     </completion>
 
     <completion string="user:is" priority="1">
        <behavior>
            <prepend>{{ </prepend>
-           <append> role="$[…]" }} $[…] {{ / user:is }}</append>
+           <append> role="$[role]" }} $[￼] {{ /user:is }}</append>
        </behavior>
    </completion>
 
    <completion string="user:is">
         <behavior>
             <prepend>{{ </prepend>
-            <append> roles="$[…]" }} $[…] {{ / user:is }}</append>
+            <append> roles="$[roles]" }} $[￼] {{ /user:is }}</append>
         </behavior>
     </completion>
 
     <completion string="user:isnt" priority="1">
        <behavior>
            <prepend>{{ </prepend>
-           <append> role="$[…]" }} $[…] {{ / user:isnt }}</append>
+           <append> role="$[role]" }} $[￼] {{ /user:isnt }}</append>
        </behavior>
    </completion>
 
    <completion string="user:isnt">
         <behavior>
             <prepend>{{ </prepend>
-            <append> roles="$[…]" }} $[…] {{ / user:isnt }}</append>
+            <append> roles="$[roles]" }} $[￼] {{ /user:isnt }}</append>
         </behavior>
     </completion>
 
@@ -659,42 +661,35 @@
     <completion string="user:logout">
         <behavior>
             <prepend>{{ </prepend>
-            <append> redirect="$[…]" }}</append>
+            <append> redirect="$[￼]" }}</append>
         </behavior>
     </completion>
 
     <completion string="user">
         <behavior>
             <prepend>{{ </prepend>
-            <append> }} $[] { /user }}</append>
-        </behavior>
-    </completion>
-
-    <completion string="user">
-        <behavior>
-            <prepend>{{ </prepend>
-            <append> super:is="true" }} $[] { /user }}</append>
+            <append> }} $[] {{ /user }}</append>
         </behavior>
     </completion>
 
     <completion string="user:profile">
         <behavior>
             <prepend>{{ </prepend>
-            <append> field="$[field]" :value="$[value]" }} $[…] { /user:profile }}</append>
+            <append> field="$[field]" :value="$[value]" }} $[￼] {{ /user:profile }}</append>
         </behavior>
     </completion>
 
     <completion string="user:profile">
         <behavior>
             <prepend>{{ </prepend>
-            <append> id="$[id]"}} $[…] { /user:profile }}</append>
+            <append> id="$[id]"}} $[￼] {{ /user:profile }}</append>
         </behavior>
     </completion>
 
     <completion string="user:profile">
         <behavior>
             <prepend>{{ </prepend>
-            <append> email="$[email]"}} $[…] { /user:profile }}</append>
+            <append> email="$[email]"}} $[￼] {{ /user:profile }}</append>
         </behavior>
     </completion>
 
@@ -744,7 +739,7 @@
     <completion string="yield">
         <behavior>
             <prepend>{{ </prepend>
-            <append> :$[] }} $[...] {{/ yield:$[] }}</append>
+            <append> :$[yield] }} $[￼] {{ /yield:$[yield] }}</append>
         </behavior>
     </completion>
 
@@ -812,24 +807,167 @@
 </set>
 
 <set name="antlers.filters">
+
+    <completion string="as">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="is">
+        <behavior>
+            <prepend></prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="equals">
+        <behavior>
+            <prepend></prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="isnt">
+        <behavior>
+            <prepend></prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="not">
+        <behavior>
+            <prepend></prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="exists"> </completion>
+    <completion string="isset"> </completion>
+    <completion string="doesnt_exist"> </completion>
+    <completion string="is_empty"> </completion>
+    <completion string="null"> </completion>
+
+    <completion string="contains">
+        <behavior>
+            <prepend></prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="doesnt_contain">
+        <behavior>
+            <prepend></prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+
     <completion string="in">
         <behavior>
             <prepend> </prepend>
             <append>="$[name]"</append>
         </behavior>
     </completion>
-    <completion string="as">
+    <completion string="not_in">
         <behavior>
             <prepend> </prepend>
-            <append>="$[name]"</append>
+            <append>="$[value]"</append>
         </behavior>
     </completion>
-    <completion string="as">
+
+    <completion string="starts_with">
         <behavior>
             <prepend> </prepend>
-            <append>="$[name]"</append>
+            <append>="$[value]"</append>
         </behavior>
     </completion>
+    <completion string="doesnt_start_with">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="ends_with">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="doesnt_end_with">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="gt">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="gte">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="lt">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+    <completion string="lte">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[value]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="matches">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[regex]"</append>
+        </behavior>
+    </completion>
+    <completion string="regex">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[regex]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="doesnt_match">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[regex]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="is_aplha"> </completion>
+    <completion string="is_numeric"> </completion>
+    <completion string="is_alpha_numeric"> </completion>
+    <completion string="is_url"> </completion>
+    <completion string="is_embeddable"> </completion>
+    <completion string="is_email"> </completion>
+
+    <completion string="is_after">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[date]"</append>
+        </behavior>
+    </completion>
+
+    <completion string="is_before">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[date]"</append>
+        </behavior>
+    </completion>
+
+    <!-- the most important one -->
+    <completion string="is_numberwang"> </completion>
+
     <completion string="key">
         <behavior>
             <prepend> </prepend>
@@ -843,6 +981,24 @@
         </behavior>
     </completion>
     <completion string="tags">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string=":any:">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string=":not:">
+        <behavior>
+            <prepend> </prepend>
+            <append>="$[name]"</append>
+        </behavior>
+    </completion>
+    <completion string=":all">
         <behavior>
             <prepend> </prepend>
             <append>="$[name]"</append>
@@ -1019,5 +1175,144 @@
     <completion string="word_count" />
     <completion string="wrap" />
     <completion string="years_ago" />
+</set>
+
+<set name="antlers.userperms">
+    <completion string="access cp" />
+    <completion string="configure collections" />
+
+    <completion string="view">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="edit">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="create">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="delete">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="publish">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="reorder">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="edit other authors">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="publish other authors">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="delete other authors">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[collection]" entries</append>
+        </behavior>
+    </completion>
+    <completion string="configure navs" />
+    <completion string="view">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[nav]" nav</append>
+        </behavior>
+    </completion>
+    <completion string="edit">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[nav]" nav</append>
+        </behavior>
+    </completion>
+    <completion string="edit">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[global]" globals</append>
+        </behavior>
+    </completion>
+    <completion string="view">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[container]" assets</append>
+        </behavior>
+    </completion>
+    <completion string="upload">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[container]" assets</append>
+        </behavior>
+    </completion>
+    <completion string="edit">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[container]" assets</append>
+        </behavior>
+    </completion>
+    <completion string="move">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[container]" assets</append>
+        </behavior>
+    </completion>
+    <completion string="rename">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[container]" assets</append>
+        </behavior>
+    </completion>
+    <completion string="delete">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[container]" assets</append>
+        </behavior>
+    </completion>
+
+    <completion string="view updates" />
+    <completion string="perform updates" />
+    <completion string="view users" />
+    <completion string="edit users" />
+    <completion string="create users" />
+    <completion string="delete useers" />
+    <completion string="change passwords" />
+    <completion string="edit user groups" />
+    <completion string="edit roles" />
+    <completion string="configure forms" />
+
+    <completion string="view">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[form]" submissions</append>
+        </behavior>
+    </completion>
+    <completion string="delete">
+        <behavior>
+            <prepend> </prepend>
+            <append> "$[form]" submissions</append>
+        </behavior>
+    </completion>
 </set>
 </completions>

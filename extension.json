@@ -1,11 +1,11 @@
 {
-    "identifier": "teriyakibomb.antlers",
+    "identifier": "teriyaki.antlers",
     "name": "Antlers",
-    "organization": "TeriyakiBomb",
+    "organization": "Teriyaki",
     "description": "Language support for statamic antlers",
     "repository": "https://github.com/TeriyakiBomb/Nova-Antlers",
     "bugs": "https://github.com/TeriyakiBomb/Nova-Antlers/issues",
-    "version": "1.0",
+    "version": "1.3",
     "keywords": ["Antlers", "statamic", "templates", "syntax"],
     "categories": ["languages", "completions"],
     "activationEvents": ["onLanguage:antlers"]
